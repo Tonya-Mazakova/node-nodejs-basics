@@ -1,16 +1,16 @@
 import { access, readdir } from 'node:fs';
 
-const path = 'src/fs/files'
+const PATH = 'src/fs/files'
 
 export const list = async () => {
-    access(path, (err) => {
+    await access(PATH, (err) => {
         if (err?.code === "ENOENT") throw 'FS operation failed'
+    })
 
-        readdir(path, (err, files) => {
-            if (err) throw 'FS operation failed'
+    readdir(PATH, (err, files) => {
+        if (err) throw 'FS operation failed'
 
-            console.log(files)
-        })
+        console.log(files)
     })
 };
 

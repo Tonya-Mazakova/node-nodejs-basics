@@ -1,12 +1,14 @@
 import { access, rm } from 'node:fs';
 
-export const remove = async () => {
-    access('src/fs/files/fileToRemove.txt', (err) => {
-        if (err?.code === "ENOENT") throw 'FS operation failed'
+const PATH = 'src/fs/files/fileToRemove.txt'
 
-        rm('src/fs/files/fileToRemove.txt', (err) => {
-            if (err) throw err
-        })
+export const remove = async () => {
+    await access(PATH, (err) => {
+        if (err?.code === "ENOENT") throw 'FS operation failed'
+    })
+
+    rm(PATH, (err) => {
+        if (err) throw err
     })
 };
 
